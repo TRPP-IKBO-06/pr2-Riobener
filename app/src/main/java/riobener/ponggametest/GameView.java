@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -14,7 +15,7 @@ import android.view.SurfaceView;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     public static Canvas canvas;
     GameThread gameThread;
-    Point rectPoint,ballPoint;
+    PointF rectPoint,ballPoint;
     Player player;
     Ball ball;
     Paint p;
@@ -35,10 +36,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
         heightScreen = this.getResources().getDisplayMetrics().heightPixels;
         gameThread = new GameThread(this,getHolder());
         p = new Paint();
-        rectPoint = new Point(80,yStartPos);
-        ballPoint = new Point(widthScreen/2,heightScreen/2);
-        player = new Player(new Rect(0,0,40,400),Color.rgb(255,255,255));
-        ball = new Ball(new Rect(0,0,80,80),ballPoint,this);
+        rectPoint = new PointF(80,yStartPos);
+        ballPoint = new PointF(widthScreen/2,heightScreen/2);
+        player = new Player(new Rect(0,0,30,400),Color.rgb(255,255,255));
+        ball = new Ball(new Rect(0,0,80,80),this);
         setFocusable(true);
     }
 
@@ -83,7 +84,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
         return firstBorderY;
     }
 
-    public void setBallCordinates(int x, int y){
+    public void setBallCordinates(float x, float y){
         if(ballPoint!=null)
         ballPoint.set(x,y);
     }
@@ -94,7 +95,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     public void detectCollision(){
-        ball.detectBallCollision(getSecondBorderY()+180,widthScreen,getFirstBorderY()-80,player.getRectangle());
+        ball.detectBallCollision(getSecondBorderY()+180,widthScreen,getFirstBorderY()-80,player);
     }
 
     public void setupBorder(){
@@ -119,8 +120,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
             case MotionEvent.ACTION_MOVE:
                 if(event.getY()<getSecondBorderY()&&event.getY()>getFirstBorderY()){
-                    rectPoint.set(50,(int)event.getY());
-                }
+                    rectPoint.set(80,(int)event.getY());
+                    }
         }
         return true;
         //return super.onTouchEvent(event);

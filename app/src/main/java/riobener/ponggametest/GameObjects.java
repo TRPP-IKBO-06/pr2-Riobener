@@ -1,11 +1,11 @@
 package riobener.ponggametest;
 
 import android.graphics.Canvas;
-import android.graphics.Point;
+import android.graphics.PointF;
 
 
 public interface GameObjects {
     public void draw(Canvas canvas);
-    public void update(Point point);
+    public void update(PointF point);
 
 }
