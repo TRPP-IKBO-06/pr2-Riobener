@@ -20,7 +20,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     Ball ball;
     Paint p;
 
-    public static int colorBG = Color.BLUE;
+    public static int colorBG = Color.BLACK;
     int yStartPos;
     int firstBorderY;
     int secondBorderY;
@@ -39,7 +39,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
         rectPoint = new PointF(80,yStartPos);
         ballPoint = new PointF(widthScreen/2,heightScreen/2);
         player = new Player(new Rect(0,0,30,400),Color.rgb(255,255,255));
-        ball = new Ball(new Rect(0,0,80,80),this);
+        ball = new Ball(new Rect(0,0,50,50),this);
         setFocusable(true);
     }
 
@@ -95,7 +95,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     public void detectCollision(){
-        ball.detectBallCollision(getSecondBorderY()+180,widthScreen,getFirstBorderY()-80,player);
+        ball.detectBallCollision(getSecondBorderY()+180,widthScreen,getFirstBorderY()-150,player);
     }
 
     public void setupBorder(){
@@ -109,7 +109,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
         canvas.drawColor(colorBG);
         ball.draw(canvas);
         player.draw(canvas);
-
         }
     }
 

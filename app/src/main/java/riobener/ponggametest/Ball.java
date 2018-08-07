@@ -16,17 +16,14 @@ public class Ball implements GameObjects {
     Paint circlePaint;
     RectF ball;
     GameView gameView;
-    public static float ballYForCollide;
 
     private float x;
     private float y;
 
-    private final float speedX = 15f;
-    private final float speedY = 15f;
+    private float speed = 10f;
 
-    private float directionX = 1f;
-    private float directionY = 0f;
-
+    private double angle = Math.toRadians(280);
+    private double direction = 1;
 
 
    public Ball(Rect circle, GameView gameView){
@@ -40,17 +37,16 @@ public class Ball implements GameObjects {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawRoundRect(ball,200,200,circlePaint);
+        canvas.drawRoundRect(ball,250,250,circlePaint);
     }
 
     @Override
     public void update(PointF point) {
         x = point.x;
         y = point.y;
-        ballYForCollide = y;
         ball.set(point.x-ball.width()/2,point.y - ball.height()/2,point.x + ball.width()/2,point.y + ball.height()/2);
-        x += directionX * speedX;
-        y += directionY * speedY;
+        x += speed * Math.cos(angle*direction);
+        y += speed * Math.sin(angle*direction);
 
         gameView.setBallCordinates(x,y);
        }
@@ -62,21 +58,33 @@ public class Ball implements GameObjects {
 
     public void detectBallCollision(int bottomBorder, int rightBorder, int topBorder, Player player){
             if(ball.bottom>=bottomBorder){
-                directionY = -1f;
+                direction = 1;
+
+
             }else if(ball.right>=rightBorder){
-                directionX = -1f;
+                    if(direction == 1){
+                        angle = Math.toRadians(260);
+                        direction = 1;
+                    }else{
+                        angle = Math.toRadians(260);
+                        direction = -1;
+                    }
             }else if(ball.top<=topBorder){
-                directionY = 1f;
+
+                direction = -1;
+
+                //center of player
             }else if((getLeftX()==player.getRightX()&&getLeftY()==player.getRectangle().centerY()+1)||(getLeftX()==player.getRightX()&&getLeftY()==player.getRectangle().centerY()-1)||
                     (getLeftX()==player.getRightX()&&getLeftY()==player.getRectangle().centerY())){
-                directionX = 1f;
-                directionY = 0f;
+
+
+                //higher than center of player
             }else if(getLeftX()==player.getRightX()&&eqCollide(getLeftY(),player.getHigherY(),player.getRectangle().centerY())==1){
-                directionX = 1f;
-                directionY = -1f;
+
+
+                //lower that center of player
             }else if(getLeftX()==player.getRightX()&&eqCollide(getLeftY(),player.getLowerY(),player.getRectangle().centerY())==0){
-                directionX = 1f;
-                directionY = 1f;
+
             }
      }
 
