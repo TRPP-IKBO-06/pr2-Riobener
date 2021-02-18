@@ -35,6 +35,7 @@ public class Player implements GameObjects {
 
 
     }
+    public void gitTest(){//someChanger1111}
     public RectF getRectangle(){
         return rectangle;
     }
