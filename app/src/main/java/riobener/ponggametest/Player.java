@@ -35,7 +35,7 @@ public class Player implements GameObjects {
 
 
     }
-    public void gitTest(){//someChangers3}
+    public void gitTest(){//someChangers1}
     public RectF getRectangle(){
         return rectangle;
     }
