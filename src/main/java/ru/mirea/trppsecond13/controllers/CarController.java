@@ -21,7 +21,9 @@ public class CarController {
 
     /** Конструктор. */
     public CarController() {
-        carList = new CsvToBeanBuilder<Car>(new InputStreamReader(this.getClass().getResourceAsStream("/MOCK_DATA.csv"))).withType(Car.class).build().parse();
+        carList = new CsvToBeanBuilder<Car>(new InputStreamReader(this.getClass()
+                .getResourceAsStream("/MOCK_DATA.csv")))
+                .withType(Car.class).build().parse();
     }
 
     /**
