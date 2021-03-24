@@ -1,4 +1,4 @@
-package ru.mirea.trpp_second_13.entity;
+package ru.mirea.trppsecond13.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.opencsv.bean.CsvBindByName;
@@ -8,13 +8,13 @@ import lombok.ToString;
 
 import java.util.List;
 
-/** Сущность автомобиля. */
+/** Сущность автомобiля. */
 @Getter
 @Setter
 @ToString
 public class Car {
 
-    /** Идентификатор. */
+    /** Iдентификатор. */
     @JsonProperty("id")
     @CsvBindByName(column = "id")
     private Long id;
